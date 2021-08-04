@@ -4,7 +4,6 @@ import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
 
 const sortQuotes = (quotes, ascending) => {
-	console.log(quotes);
 	return quotes.sort((quoteA, quoteB) => {
 		if (ascending) {
 			return quoteA.id > quoteB.id ? 1 : -1;
@@ -24,7 +23,10 @@ const QuoteList = props => {
 	const sortedQuotes = sortQuotes(props.quotes, isAscending);
 
 	const changeSortingHandler = () => {
-		history.push('/quotes?sort=' + (isAscending ? 'desc' : 'asc'));
+		history.push({
+			pathname: location.pathname,
+			search: `?sort=${isAscending ? 'desc' : 'asc'}`,
+		});
 	};
 	return (
 		<Fragment>
